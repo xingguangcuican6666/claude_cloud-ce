@@ -1,0 +1,31 @@
+# 运行时产物 / 密钥 —— 不进版本库
+# 注意:用 config/* 而不是 config/——父目录整体被忽略时,! 否定规则对目录内文件
+# 不生效(git 的既定行为),config/* 只排除目录内容、不整体标记目录,否定规则才有效。
+config/*
+!config/config.example.json
+proxy.log
+*.log
+.DS_Store
+node_modules/
+*.pid
+boot.log
+
+# 真实第三方凭据(代码默认路径曾指向仓库根,现已改走 config/ 或 CC_DATA_DIR,这里是纵深防御)
+/*firebase-adminsdk*.json
+/google-services.json
+
+# 反编译/重打包临时产物、脚本自身的输出目录(大文件 + 官方二进制 + 可能含隐私数据,任何时候都不该入库)
+/app_temp_work/
+/repack-out/
+/*.apk
+/*.apks
+
+# 未随仓库分发的第三方工具二进制(用到时按文档自行下载)
+/tools/*.jar
+
+# 本机工具运行时产物,和项目无关
+/.claude/
+
+# 编辑器
+.vscode/
+.idea/

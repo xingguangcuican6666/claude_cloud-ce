@@ -1,0 +1,29 @@
+{
+  "_说明": "复制这份文件为 config/config.json 并按需填写;所有字段都是可选的,除了 upstreamBase(核心反代目标,必填,服务启动时会校验)。每个字段也可以用同名环境变量覆盖(见 README 的环境变量表),环境变量优先级更高。",
+
+  "upstreamBase": "https://your-upstream-endpoint.example.com",
+  "upstreamToken": "sk-or-bearer-token-for-your-upstream",
+
+  "bind": "0.0.0.0",
+  "proxyPort": 8898,
+  "webPort": 8890,
+  "appPort": 443,
+
+  "_adminSecret说明": "留空(删掉这个字段或留空字符串)不影响使用——首次启动会自动生成一个随机值并写回 config/admin.token,启动日志会打印一次。只有想自己指定固定值时才需要填这里。",
+  "adminSecret": "",
+
+  "_fcm说明": "可选功能,不需要推送通知就整个不填。需要自己申请 Firebase 项目,步骤见 docs/fcm-setup.md。",
+  "fcmServiceAccountPath": "",
+
+  "_smtp说明": "可选功能,不配置邮箱登录验证码就只会出现在服务端日志里(本机单人用完全够用)。",
+  "smtp": {
+    "host": "smtp.example.com",
+    "port": 465,
+    "user": "you@example.com",
+    "pass": "smtp-password",
+    "from": "you@example.com",
+    "fromName": "cc-cloud"
+  },
+
+  "quiet": false
+}

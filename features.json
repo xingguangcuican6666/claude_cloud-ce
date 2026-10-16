@@ -1,0 +1,10 @@
+{
+  "tengu_ccr_bridge": true,
+  "tengu_bridge_repl_v2": true,
+  "tengu_ccr_v2_bridge_create_cli": true,
+  "tengu_copper_bridge": true,
+  "tengu_bridge_host_profile": "off",
+  "tengu_bridge_poll_interval_ms": 2000,
+  "tengu_gb_eval_authed_enable": true,
+  "tengu_bridge_attestation_enforce": false
+}
