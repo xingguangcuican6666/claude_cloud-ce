@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+/* 配色/字体 token:复用 server/core.mjs 分享页(sharePageHtml)已经验证过的同一套值,
+   来源是开源 assistant-ui 项目的 "Claude Clone" 主题示例发布的设计 token(MIT,
+   github.com/assistant-ui/assistant-ui,apps/docs/.../examples/claude.tsx)——
+   不是扒 claude.ai 自己编译的 CSS(实测会被 403 拦,也装不上)。
+   Tailwind v4 用 @theme 把这些声明成 --color-* 变量,自动得到 bg-bg/text-fg/border-border 等工具类。 */
+@theme {
+  --color-bg: #F0ECE0;
+  --color-surface: #ffffff;
+  --color-border: #E5E0D6;
+  --color-bubble-user: #E5E0D6;
+  --color-fg: #1a1a18;
+  --color-muted: #5b5950;
+  --color-accent: #c96442;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: ui-monospace, Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #2b2a27;
+    --color-surface: #1f1e1b;
+    --color-border: #3d3a35;
+    --color-bubble-user: #393937;
+    --color-fg: #eeeeee;
+    --color-muted: #a3a098;
+    /* --color-accent 浅深一致,不用覆盖 */
+  }
+}
+
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-serif);
+}
+/* 代码块/工具调用参数用等宽字体,衬线字体不适合展示代码 */
+pre, code { font-family: var(--font-mono); }
+
+/* markdown 正文的最小必要样式(没装 @tailwindcss/typography,手写这几条够用,
+   避免为了 markdown 排版多引入一个依赖)。Tailwind preflight 会把标题/列表/引用
+   的原生浏览器样式全部清零,这里只补齐间距和层级,不追求花哨。 */
+.md :is(h1, h2, h3, h4) { font-weight: 600; margin: 0.6em 0 0.3em; }
+.md h1 { font-size: 1.3em; }
+.md h2 { font-size: 1.15em; }
+.md h3 { font-size: 1.05em; }
+.md p { margin: 0.4em 0; }
+.md ul, .md ol { margin: 0.4em 0; padding-left: 1.4em; }
+.md li { margin: 0.15em 0; }
+.md ul { list-style: disc; }
+.md ol { list-style: decimal; }
+.md blockquote { margin: 0.4em 0; padding-left: 0.8em; border-left: 2px solid var(--color-border); color: var(--color-muted); }
+.md a { color: var(--color-accent); text-decoration: underline; }
+.md table { border-collapse: collapse; margin: 0.4em 0; }
+.md :is(th, td) { border: 1px solid var(--color-border); padding: 0.3em 0.6em; }
+.md code { background: color-mix(in srgb, var(--color-fg) 10%, transparent); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+.md pre { background: color-mix(in srgb, var(--color-fg) 8%, transparent); padding: 0.7em; border-radius: 8px; overflow-x: auto; }
+.md pre code { background: none; padding: 0; }
+
